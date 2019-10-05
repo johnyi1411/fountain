@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({
-  user, id, component: Component, ...rest
+  user, id, component: Component, handleUserChange, ...rest
 }) => (
   <Route
     {...rest}
     render={(props) => (user ? (
-      <Component {...props} user={user} id={id} />
+      <Component {...props} user={user} id={id} handleUserChange={handleUserChange} />
     ) : (
       <Redirect
         to={{

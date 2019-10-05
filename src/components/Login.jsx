@@ -35,7 +35,7 @@ class Login extends React.Component {
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
-        handleUserChange(username, password);
+        handleUserChange(username, 1);
         this.setState({ redirectToReferrer: true });
       }}
       >

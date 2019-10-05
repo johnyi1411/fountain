@@ -32,7 +32,8 @@ class EmployerPage extends React.Component {
   }
 
   goBack() {
-    const { history } = this.props;
+    const { history, handleUserChange } = this.props;
+    handleUserChange(null, null);
     history.goBack();
   }
 
@@ -61,7 +62,7 @@ class EmployerPage extends React.Component {
                     <p>{`description: ${job.description}`}</p>
                   </div>
                 ))}
-                <button type="button" onClick={this.goBack}>Go Back</button>
+                <button type="button" onClick={this.goBack}>Logout</button>
               </div>
             )}
           />
