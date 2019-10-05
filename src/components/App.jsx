@@ -12,16 +12,17 @@ class App extends React.Component {
     super();
     this.state = {
       user: null,
+      id: null,
     };
     this.handleUserChange = this.handleUserChange.bind(this);
   }
 
   handleUserChange(user) {
-    this.setState({ user });
+    this.setState({ user, id: 1 });
   }
 
   render() {
-    const { user } = this.state;
+    const { user, id } = this.state;
 
     return (
       <Router>
@@ -41,7 +42,8 @@ class App extends React.Component {
             )}
           />
           <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
-          <PrivateRoute path="/employer" user={user} component={EmployerPage} />
+          {/* <PrivateRoute path="/employer" user={user} render={(props) => <EmployerPage {...props} user={user} id={id} />} /> */}
+          <PrivateRoute path="/employer" user={user} id={id} component={EmployerPage} />
           <PrivateRoute path="/applicant" user={user} />
         </div>
       </Router>

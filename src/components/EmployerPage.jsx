@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import EmployerJob from './EmployerJob';
+import NewJobForm from './NewJobForm';
 
 class EmployerPage extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class EmployerPage extends React.Component {
     };
 
     this.goBack = this.goBack.bind(this);
+    this.handleNewJob = this.handleNewJob.bind(this);
   }
 
   goBack() {
@@ -34,8 +36,13 @@ class EmployerPage extends React.Component {
     history.goBack();
   }
 
+  handleNewJob(title, description, id) {
+    console.log(title, description, id);
+  }
+
   render() {
     const { jobs } = this.state;
+    const { user, id } = this.props;
 
     return (
       <Router>
@@ -45,6 +52,7 @@ class EmployerPage extends React.Component {
             path="/employer"
             render={() => (
               <div>
+                <NewJobForm handleNewJob={this.handleNewJob} id={id} />
                 {jobs.map((job) => (
                   <div key={job.id} className="employer-jobs">
                     <Link to={`/employer/${job.employer}/job/${job.id}`}>{job.id}</Link>
