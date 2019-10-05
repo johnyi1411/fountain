@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ApplicantPage extends React.Component {
   constructor(props) {
@@ -18,16 +20,22 @@ class ApplicantPage extends React.Component {
           description: 'with 6 years',
         },
       ],
-      applications: [1],
+      applications: { 1: true },
     };
 
     this.goBack = this.goBack.bind(this);
+    this.handleApply = this.handleApply.bind(this);
   }
 
   goBack() {
     const { history, handleUserChange } = this.props;
     handleUserChange(null, null);
     history.goBack();
+  }
+
+  handleApply(id) {
+    const { applications } = this.state;
+    this.setState({ applications: { ...applications, [id]: true } });
   }
 
   render() {
@@ -40,7 +48,7 @@ class ApplicantPage extends React.Component {
             <p>{`Employer: ${job.employer}`}</p>
             <p>{`Title: ${job.title}`}</p>
             <p>{`Description: ${job.description}`}</p>
-            {applications.includes(job.id) ? <p>Applied</p> : <p>Apply</p>}
+            {applications[job.id] ? <p>Applied</p> : <button type="button" onClick={() => this.handleApply(job.id)}>Apply</button>}
           </div>
         ))}
         <button type="button" onClick={this.goBack}>Logout</button>
@@ -48,5 +56,10 @@ class ApplicantPage extends React.Component {
     );
   }
 }
+
+ApplicantPage.propTypes = {
+  history: PropTypes.object.isRequired,
+  handleUserChange: PropTypes.func.isRequired,
+};
 
 export default ApplicantPage;

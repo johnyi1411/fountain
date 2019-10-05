@@ -77,6 +77,7 @@ EmployerPage.propTypes = {
   history: PropTypes.object.isRequired,
   user: PropTypes.string,
   id: PropTypes.number,
+  handleUserChange: PropTypes.func.isRequired,
 };
 
 EmployerPage.defaultProps = {
