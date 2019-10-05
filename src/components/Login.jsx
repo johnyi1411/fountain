@@ -1,7 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,7 +25,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { location } = this.props;
+    const { from } = location.state || { from: { pathname: '/' } };
     const { redirectToReferrer } = this.state;
     if (redirectToReferrer) return <Redirect to={from} />;
 
@@ -54,6 +55,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   handleUserChange: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default Login;

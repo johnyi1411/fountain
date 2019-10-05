@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route, Link,
+  BrowserRouter as Router, Route, Link,
 } from 'react-router-dom';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
@@ -9,9 +10,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      jobs: [],
       user: null,
-      employer: false,
     };
     this.handleUserChange = this.handleUserChange.bind(this);
   }
@@ -22,16 +21,7 @@ class App extends React.Component {
 
   render() {
     const { user } = this.state;
-    const login = user ? (
-      <button
-        type="submit"
-        onClick={() => {
-          this.handleUserChange(null);
-        }}
-      >
-      Logout
-      </button>
-    ) : <Login handleUserChange={this.handleUserChange} />;
+
     return (
       <Router>
         <div>

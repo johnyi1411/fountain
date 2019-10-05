@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component, user, ...rest }) => (
+const PrivateRoute = ({ user, ...rest }) => (
   <Route
     {...rest}
     render={(props) => (user ? (
@@ -23,5 +25,13 @@ const PrivateRoute = ({ component, user, ...rest }) => (
     ))}
   />
 );
+
+PrivateRoute.propTypes = {
+  user: PropTypes.string,
+};
+
+PrivateRoute.defaultProps = {
+  user: null,
+};
 
 export default PrivateRoute;
