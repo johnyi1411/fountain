@@ -19,7 +19,7 @@ class EmployerJob extends React.Component {
 
   render() {
     const { match } = this.props;
-    const { id } = match.params;
+    const { id, employer } = match.params;
     const { applicants } = this.state;
     return (
       <div key={id} className="employer-jobs">

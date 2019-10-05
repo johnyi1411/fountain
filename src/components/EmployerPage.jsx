@@ -17,7 +17,7 @@ class EmployerPage extends React.Component {
         },
         {
           id: 2,
-          employer: 'jian',
+          employer: 'brian',
           title: 'software engineering intern experience',
           description: 'with 6 years',
         },
@@ -38,7 +38,7 @@ class EmployerPage extends React.Component {
               <div>
                 {jobs.map((job) => (
                   <div key={job.id} className="employer-jobs">
-                    <Link to={`/job/${job.id}`}>{job.id}</Link>
+                    <Link to={`/employer/${job.employer}/job/${job.id}`}>{job.id}</Link>
                     <p>{`employer: ${job.employer}`}</p>
                     <p>{`title: ${job.title}`}</p>
                     <p>{`description: ${job.description}`}</p>
@@ -47,7 +47,7 @@ class EmployerPage extends React.Component {
               </div>
             )}
           />
-          <Route path="/job/:id" component={EmployerJob} />
+          <Route path="/employer/:employer/job/:id" component={EmployerJob} />
         </div>
       </Router>
     );
