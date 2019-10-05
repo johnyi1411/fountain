@@ -20,7 +20,8 @@ class EmployerJob extends React.Component {
   }
 
   goBack() {
-    this.props.history.goBack();
+    const { history } = this.props;
+    history.goBack();
   }
 
   render() {
