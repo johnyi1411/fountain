@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NewJobForm extends React.Component {
   constructor(props) {
@@ -43,5 +44,14 @@ class NewJobForm extends React.Component {
     );
   }
 }
+
+NewJobForm.propTypes = {
+  handleNewJob: PropTypes.func.isRequired,
+  id: PropTypes.number,
+};
+
+NewJobForm.defaultProps = {
+  id: null,
+};
 
 export default NewJobForm;
