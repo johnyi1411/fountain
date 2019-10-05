@@ -6,6 +6,7 @@ import {
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import EmployerPage from './EmployerPage';
+import ApplicantPage from './ApplicantPage';
 
 class App extends React.Component {
   constructor() {
@@ -43,7 +44,7 @@ class App extends React.Component {
           />
           <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
           <PrivateRoute path="/employer" user={user} id={id} component={EmployerPage} />
-          <PrivateRoute path="/applicant" user={user} />
+          <PrivateRoute path="/applicant" user={user} id={id} component={ApplicantPage} />
         </div>
       </Router>
     );

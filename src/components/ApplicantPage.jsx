@@ -28,9 +28,10 @@ class ApplicantPage extends React.Component {
     return (
       <div>
         {jobs.map((job) => (
-          <div className="applicant-jobs">
-            <p>{`Job ID: ${job.id}`}</p>
+          <div key={job.id} className="applicant-jobs">
             <p>{`Employer: ${job.employer}`}</p>
+            <p>{`Title: ${job.title}`}</p>
+            <p>{`Description: ${job.description}`}</p>
           </div>
         ))}
       </div>
