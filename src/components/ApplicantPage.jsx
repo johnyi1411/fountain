@@ -18,7 +18,7 @@ class ApplicantPage extends React.Component {
           description: 'with 6 years',
         },
       ],
-      applications: [],
+      applications: [1],
     };
 
     this.goBack = this.goBack.bind(this);
@@ -31,7 +31,7 @@ class ApplicantPage extends React.Component {
   }
 
   render() {
-    const { jobs } = this.state;
+    const { jobs, applications } = this.state;
 
     return (
       <div>
@@ -40,6 +40,7 @@ class ApplicantPage extends React.Component {
             <p>{`Employer: ${job.employer}`}</p>
             <p>{`Title: ${job.title}`}</p>
             <p>{`Description: ${job.description}`}</p>
+            {applications.includes(job.id) ? <p>Applied</p> : <p>Apply</p>}
           </div>
         ))}
         <button type="button" onClick={this.goBack}>Logout</button>
