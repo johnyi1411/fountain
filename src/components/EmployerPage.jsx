@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  BrowserRouter as Router, Route, Link,
+} from 'react-router-dom';
+import EmployerJob from './EmployerJob';
 
 class EmployerPage extends React.Component {
   constructor(props) {
@@ -25,15 +29,27 @@ class EmployerPage extends React.Component {
     const { jobs } = this.state;
 
     return (
-      <div>
-        {jobs.map((job) => (
-          <div key={job.id} className="employer-jobs">
-            <p>{`employer: ${job.employer}`}</p>
-            <p>{`title: ${job.title}`}</p>
-            <p>{`descriptiopn: ${job.description}`}</p>
-          </div>
-        ))}
-      </div>
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/employer"
+            render={() => (
+              <div>
+                {jobs.map((job) => (
+                  <div key={job.id} className="employer-jobs">
+                    <Link to={`/job/${job.id}`}>{job.id}</Link>
+                    <p>{`employer: ${job.employer}`}</p>
+                    <p>{`title: ${job.title}`}</p>
+                    <p>{`description: ${job.description}`}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          />
+          <Route path="/job/:id" component={EmployerJob} />
+        </div>
+      </Router>
     );
   }
 }
