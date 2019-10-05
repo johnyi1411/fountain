@@ -4,7 +4,7 @@
   "description": "coding challenge for fountain",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start-dev": "nodemon ./server/server.js",
     "build": "npx webpack --watch",
     "start": "node ./server/server.js"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "babel-jest": "^24.9.0",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "react": "^16.10.2",
@@ -24,6 +25,8 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
