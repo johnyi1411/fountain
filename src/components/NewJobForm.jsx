@@ -26,21 +26,24 @@ class NewJobForm extends React.Component {
     const { title, description } = this.state;
 
     return (
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        handleNewJob(title, description, id);
-      }}
-      >
-        <label htmlFor="title">
-          Title:
-          <input type="text" onChange={this.handleTitleChange} />
-        </label>
-        <label htmlFor="description">
-          Description:
-          <input type="text" onChange={this.handleDescriptionChange} />
-        </label>
-        <input type="submit" value="submit" />
-      </form>
+      <div>
+        <h1>Create New Job</h1>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleNewJob(title, description, id);
+        }}
+        >
+          <label htmlFor="title">
+            Title:
+            <input type="text" onChange={this.handleTitleChange} />
+          </label>
+          <label htmlFor="description">
+            Description:
+            <input type="text" onChange={this.handleDescriptionChange} />
+          </label>
+          <input type="submit" value="submit" />
+        </form>
+      </div>
     );
   }
 }
