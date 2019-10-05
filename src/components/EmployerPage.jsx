@@ -74,6 +74,13 @@ class EmployerPage extends React.Component {
 
 EmployerPage.propTypes = {
   history: PropTypes.object.isRequired,
+  user: PropTypes.string,
+  id: PropTypes.number,
+};
+
+EmployerPage.defaultProps = {
+  user: null,
+  id: null,
 };
 
 export default EmployerPage;
