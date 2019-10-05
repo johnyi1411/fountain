@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router, Switch, Route, Link,
 } from 'react-router-dom';
 import Login from './Login';
+import PrivateRoute from './PrivateRoute';
 
 class App extends React.Component {
   constructor() {
@@ -32,27 +33,22 @@ class App extends React.Component {
       </button>
     ) : <Login handleUserChange={this.handleUserChange} />;
     return (
-      <div>
-        {login}
-        <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/topics">Topics</Link>
-              </li>
-            </ul>
-            <Route exact path="/" render={() => <h1>just /</h1>} />
-            <Route path="/about" render={() => <h1>about</h1>} />
-            <Route path="/topics" render={() => <h1>topics</h1>} />
-          </div>
-        </Router>
-      </div>
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/employer">Employers</Link>
+            </li>
+            <li>
+              <Link to="/applicant">Applicants</Link>
+            </li>
+          </ul>
+          {/* <Route path="/employer" render={() => <h1>Employers</h1>} />
+          <Route path="/applicant" render={() => <h1>Applicants</h1>} /> */}
+          <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
+          <PrivateRoute path="/employer" user={user} />
+        </div>
+      </Router>
     );
   }
 }

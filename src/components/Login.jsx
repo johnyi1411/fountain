@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class Login extends React.Component {
     this.state = {
       username: null,
       password: null,
+      redirectToReferrer: false,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -22,12 +25,17 @@ class Login extends React.Component {
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { redirectToReferrer } = this.state;
+    if (redirectToReferrer) return <Redirect to={from} />;
+
     const { username, password } = this.state;
     const { handleUserChange } = this.props;
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
         handleUserChange(username, password);
+        this.setState({ redirectToReferrer: true });
       }}
       >
         <label htmlFor="username">
