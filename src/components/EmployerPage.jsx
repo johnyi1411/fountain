@@ -37,8 +37,12 @@ class EmployerPage extends React.Component {
     history.goBack();
   }
 
-  handleNewJob(title, description, id) {
-    console.log(title, description, id);
+  handleNewJob(title, description, id, employer) {
+    const { jobs } = this.state;
+    jobs.push({
+      title, id: 3, description, employer,
+    });
+    this.setState({ jobs });
   }
 
   render() {
@@ -53,7 +57,7 @@ class EmployerPage extends React.Component {
             path="/employer"
             render={() => (
               <div>
-                <NewJobForm handleNewJob={this.handleNewJob} id={id} />
+                <NewJobForm handleNewJob={this.handleNewJob} id={id} user={user} />
                 {jobs.map((job) => (
                   <div key={job.id} className="employer-jobs">
                     <Link to={`/employer/${job.employer}/job/${job.id}`}>{job.id}</Link>

@@ -22,7 +22,7 @@ class NewJobForm extends React.Component {
   }
 
   render() {
-    const { handleNewJob, id } = this.props;
+    const { handleNewJob, id, user } = this.props;
     const { title, description } = this.state;
 
     return (
@@ -30,7 +30,7 @@ class NewJobForm extends React.Component {
         <h1>Create New Job</h1>
         <form onSubmit={(e) => {
           e.preventDefault();
-          handleNewJob(title, description, id);
+          handleNewJob(title, description, id, user);
         }}
         >
           <label htmlFor="title">
@@ -51,10 +51,12 @@ class NewJobForm extends React.Component {
 NewJobForm.propTypes = {
   handleNewJob: PropTypes.func.isRequired,
   id: PropTypes.number,
+  user: PropTypes.string,
 };
 
 NewJobForm.defaultProps = {
   id: null,
+  user: null,
 };
 
 export default NewJobForm;
