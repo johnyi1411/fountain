@@ -48,10 +48,10 @@ class ApplicantPage extends React.Component {
             <p>{`Employer: ${job.employer}`}</p>
             <p>{`Title: ${job.title}`}</p>
             <p>{`Description: ${job.description}`}</p>
-            {applications[job.id] ? <p>Applied</p> : <button type="button" onClick={() => this.handleApply(job.id)}>Apply</button>}
+            {applications[job.id] ? <p>Applied</p> : <button className="apply-button" type="button" onClick={() => this.handleApply(job.id)}>Apply</button>}
           </div>
         ))}
-        <button type="button" onClick={this.goBack}>Logout</button>
+        <button id="logout-button" type="button" onClick={this.goBack}>Logout</button>
       </div>
     );
   }

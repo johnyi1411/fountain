@@ -8,8 +8,8 @@ import PrivateRoute from '../src/components/PrivateRoute';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('App', () => {
-  it('renders Routes and Private Routes', () => {
+describe('PrivateRoute', () => {
+  it('renders Route', () => {
     const wrapper = shallow(<PrivateRoute />);
     expect(wrapper.find(Route)).toHaveLength(1);
   });
