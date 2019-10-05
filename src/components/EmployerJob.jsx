@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class EmployerJob extends React.Component {
   constructor(props) {
@@ -41,5 +43,10 @@ class EmployerJob extends React.Component {
     );
   }
 }
+
+EmployerJob.propTypes = {
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 export default EmployerJob;

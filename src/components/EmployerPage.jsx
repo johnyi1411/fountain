@@ -1,7 +1,9 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import {
   BrowserRouter as Router, Route, Link,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import EmployerJob from './EmployerJob';
 
 class EmployerPage extends React.Component {
@@ -61,5 +63,9 @@ class EmployerPage extends React.Component {
     );
   }
 }
+
+EmployerPage.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 export default EmployerPage;
