@@ -44,7 +44,7 @@ class App extends React.Component {
           />
           <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
           <PrivateRoute path="/employer" user={user} id={id} handleUserChange={this.handleUserChange} component={EmployerPage} />
-          <PrivateRoute path="/applicant" user={user} id={id} component={ApplicantPage} />
+          <PrivateRoute path="/applicant" user={user} id={id} handleUserChange={this.handleUserChange} component={ApplicantPage} />
         </div>
       </Router>
     );

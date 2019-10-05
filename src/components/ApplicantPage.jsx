@@ -20,6 +20,14 @@ class ApplicantPage extends React.Component {
       ],
       applications: [],
     };
+
+    this.goBack = this.goBack.bind(this);
+  }
+
+  goBack() {
+    const { history, handleUserChange } = this.props;
+    handleUserChange(null, null);
+    history.goBack();
   }
 
   render() {
@@ -34,6 +42,7 @@ class ApplicantPage extends React.Component {
             <p>{`Description: ${job.description}`}</p>
           </div>
         ))}
+        <button type="button" onClick={this.goBack}>Logout</button>
       </div>
     );
   }
