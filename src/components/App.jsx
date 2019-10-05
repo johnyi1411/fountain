@@ -35,18 +35,23 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/employer">Employers</Link>
-            </li>
-            <li>
-              <Link to="/applicant">Applicants</Link>
-            </li>
-          </ul>
-          {/* <Route path="/employer" render={() => <h1>Employers</h1>} />
-          <Route path="/applicant" render={() => <h1>Applicants</h1>} /> */}
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <ul>
+                <li>
+                  <Link to="/employer">Employers</Link>
+                </li>
+                <li>
+                  <Link to="/applicant">Applicants</Link>
+                </li>
+              </ul>
+            )}
+          />
           <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
           <PrivateRoute path="/employer" user={user} />
+          <PrivateRoute path="/applicant" user={user} />
         </div>
       </Router>
     );
