@@ -15,6 +15,12 @@ class EmployerJob extends React.Component {
         },
       ],
     };
+
+    this.goBack = this.goBack.bind(this);
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   render() {
@@ -22,10 +28,14 @@ class EmployerJob extends React.Component {
     const { id, employer } = match.params;
     const { applicants } = this.state;
     return (
-      <div key={id} className="employer-jobs">
-        <div>
+      <div key={id}>
+        <div className="employer-jobs">
+          <p>{`Job ID: ${id}`}</p>
+          <p>{`Employer: ${employer}`}</p>
+          <h1>Applicants</h1>
           {applicants.map((applicant) => <p key={applicant.id}>{applicant.name}</p>)}
         </div>
+        <button type="button" onClick={this.goBack}>Go Back</button>
       </div>
     );
   }

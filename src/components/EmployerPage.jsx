@@ -23,6 +23,12 @@ class EmployerPage extends React.Component {
         },
       ],
     };
+
+    this.goBack = this.goBack.bind(this);
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   render() {
@@ -44,6 +50,7 @@ class EmployerPage extends React.Component {
                     <p>{`description: ${job.description}`}</p>
                   </div>
                 ))}
+                <button type="button" onClick={this.goBack}>Go Back</button>
               </div>
             )}
           />
