@@ -4,17 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ user, ...rest }) => (
+const PrivateRoute = ({ user, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) => (user ? (
-      <h1>logged in</h1>
-      // <Redirect
-      //   to={{
-      //     pathname: '/employers',
-      //     // state: { from: props.location },
-      //   }}
-      // />
+      <Component {...props} />
     ) : (
       <Redirect
         to={{

@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
 import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Route, Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { Route } from 'react-router-dom';
 import App from '../src/components/App';
 import PrivateRoute from '../src/components/PrivateRoute';
 
