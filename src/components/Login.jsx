@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
@@ -16,6 +17,7 @@ class Login extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSignUpView = this.handleSignUpView.bind(this);
+    this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
   }
 
   handleUsernameChange(e) {
@@ -31,23 +33,52 @@ class Login extends React.Component {
     this.setState({ signUpView: !signUpView });
   }
 
+  handleLoginFormSubmit(e) {
+    e.preventDefault();
+    const { username, password } = this.state;
+    const { handleUserChange } = this.props;
+    handleUserChange(username, 1);
+    this.setState({ redirectToReferrer: true });
+  }
+
+  // TO DO
+  handleLogin() {
+    console.log('hello');
+  }
+
+  // TO DO
+  handleSignUp(username, password) {
+    axios.post('/users', {
+      username,
+      password,
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          console.log('successful sign up');
+          // send user back to employer or applicant page after sign up.
+          this.setState({ redirectToReferrer: true });
+        } else {
+          console.log('Sign up error');
+        }
+      })
+      .catch((error) => {
+        console.log('sign up server error: ');
+        console.log(error);
+      });
+  }
+
   render() {
     const { location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
     const { redirectToReferrer, signUpView } = this.state;
+
     if (redirectToReferrer) return <Redirect to={from} />;
 
-    const { username, password } = this.state;
-    const { handleUserChange } = this.props;
     return (
       <div>
         <h1>{signUpView ? 'Sign Up' : 'Login'}</h1>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          handleUserChange(username, 1);
-          this.setState({ redirectToReferrer: true });
-        }}
-        >
+        <form onSubmit={this.handleLoginFormSubmit}>
           <label htmlFor="username">
             Username:
             <input type="text" onChange={this.handleUsernameChange} />
