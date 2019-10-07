@@ -1,27 +1,21 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import EmployerLogin from './EmployerLogin';
 
-class Login extends React.Component {
+class EmployerLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: null,
       password: null,
       company: null,
-      redirectToReferrer: false,
       signUpView: false,
     };
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleCompanyChange = this.handleCompanyChange.bind(this);
-    this.handleSignUpView = this.handleSignUpView.bind(this);
     this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
-    this.handleRedirect = this.handleRedirect.bind(this);
+    this.handleSignUpView = this.handleSignUpView.bind(this);
   }
 
   handleEmailChange(e) {
@@ -56,19 +50,8 @@ class Login extends React.Component {
     }
   }
 
-  handleRedirect() {
-    const { redirectToReferrer } = this.state;
-    this.setState({ redirectToReferrer: !redirectToReferrer });
-  }
-
-  // TO DO
-  handleLogin() {
-    console.log('hello');
-  }
-
-  // TO DO
   handleSignUp(email, password, company) {
-    const { handleUserChange } = this.props;
+    const { handleUserChange, handleRedirect } = this.props;
 
     axios.post('/employer', {
       email,
@@ -80,7 +63,7 @@ class Login extends React.Component {
         if (response.data) {
           console.log('successful sign up');
           // send user back to employer or applicant page after sign up.
-          this.setState({ redirectToReferrer: true });
+          handleRedirect();
           handleUserChange(email, 1);
         } else {
           console.log('Sign up error');
@@ -93,23 +76,33 @@ class Login extends React.Component {
   }
 
   render() {
-    const { location } = this.props;
-    const { from } = location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) return <Redirect to={from} />;
+    const { signUpView } = this.state;
 
     return (
       <div>
-        {from.pathname === '/employer' ? <EmployerLogin handleRedirect={this.handleRedirect} /> : <div>nothing</div>}
+        <h1>Employer</h1>
+        <h2>{signUpView ? 'Sign Up' : 'Login'}</h2>
+        <form onSubmit={this.handleLoginFormSubmit}>
+          <label htmlFor="email">
+            Email:
+            <input type="text" onChange={this.handleEmailChange} />
+          </label>
+          <label htmlFor="password">
+            Password:
+            <input type="password" onChange={this.handlePasswordChange} />
+          </label>
+          {signUpView && (
+          <label htmlFor="company">
+            Company:
+            <input type="text" onChange={this.handleCompanyChange} />
+          </label>
+          )}
+          <input type="submit" value="submit" />
+        </form>
+        <button type="button" onClick={this.handleSignUpView}>{signUpView ? 'Login' : 'Sign Up'}</button>
       </div>
     );
   }
 }
 
-Login.propTypes = {
-  handleUserChange: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
-};
-
-export default Login;
+export default EmployerLogin;
