@@ -56,7 +56,7 @@ const Job = sequelize.define('job', {
     autoIncrement: true,
   },
   employer_id: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
     references: {
       model: Employer,
