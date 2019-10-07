@@ -93,7 +93,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, handleUserChange } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
     const { redirectToReferrer } = this.state;
 
@@ -101,7 +101,7 @@ class Login extends React.Component {
 
     return (
       <div>
-        {from.pathname === '/employer' ? <EmployerLogin handleRedirect={this.handleRedirect} /> : <div>nothing</div>}
+        {from.pathname === '/employer' ? <EmployerLogin handleRedirect={this.handleRedirect} handleUserChange={handleUserChange} /> : <div>nothing</div>}
       </div>
     );
   }
