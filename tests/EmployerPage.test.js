@@ -26,22 +26,6 @@ describe('EmployerPage', () => {
     expect(wrapper.find('div.employer-jobs')).toHaveLength(2);
   });
 
-  // it('render apply-button correctly according to applications', () => {
-  //   const props = {
-  //     history: {},
-  //     handleUserChange: jest.fn(),
-  //   };
-  //   const wrapper = shallow(<ApplicantPage {...props} />);
-  //   expect(wrapper.find('button.apply-button')).toHaveLength(1);
-  //   wrapper.setState({
-  //     applications: {
-  //       1: true,
-  //       2: true,
-  //     },
-  //   });
-  //   expect(wrapper.find('button.apply-button')).toHaveLength(0);
-  // });
-
   // TO DO
   // Create test for apply button functionality
 });
