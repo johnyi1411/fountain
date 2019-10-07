@@ -10,10 +10,12 @@ class Login extends React.Component {
       username: null,
       password: null,
       redirectToReferrer: false,
+      signUpView: false,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSignUpView = this.handleSignUpView.bind(this);
   }
 
   handleUsernameChange(e) {
@@ -24,31 +26,40 @@ class Login extends React.Component {
     this.setState({ password: e.target.value });
   }
 
+  handleSignUpView() {
+    const { signUpView } = this.state;
+    this.setState({ signUpView: !signUpView });
+  }
+
   render() {
     const { location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
+    const { redirectToReferrer, signUpView } = this.state;
     if (redirectToReferrer) return <Redirect to={from} />;
 
     const { username, password } = this.state;
     const { handleUserChange } = this.props;
     return (
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        handleUserChange(username, 1);
-        this.setState({ redirectToReferrer: true });
-      }}
-      >
-        <label htmlFor="username">
-          Username:
-          <input type="text" onChange={this.handleUsernameChange} />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input type="password" onChange={this.handlePasswordChange} />
-        </label>
-        <input type="submit" value="submit" />
-      </form>
+      <div>
+        <h1>{signUpView ? 'Sign Up' : 'Login'}</h1>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleUserChange(username, 1);
+          this.setState({ redirectToReferrer: true });
+        }}
+        >
+          <label htmlFor="username">
+            Username:
+            <input type="text" onChange={this.handleUsernameChange} />
+          </label>
+          <label htmlFor="password">
+            Password:
+            <input type="password" onChange={this.handlePasswordChange} />
+          </label>
+          <input type="submit" value="submit" />
+        </form>
+        <button type="button" onClick={this.handleSignUpView}>{signUpView ? 'Login' : 'Sign Up'}</button>
+      </div>
     );
   }
 }
