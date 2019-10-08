@@ -4,7 +4,6 @@ module.exports = {
   createEmployer: (email, password, company, callback) => {
     Employer.create({ email, password, company })
       .then((employer) => {
-        console.log(employer.id);
         callback(null, employer);
       })
       .catch((err) => {

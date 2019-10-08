@@ -17,6 +17,7 @@ class EmployerLogin extends React.Component {
     this.handleCompanyChange = this.handleCompanyChange.bind(this);
     this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
     this.handleSignUpView = this.handleSignUpView.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleEmailChange(e) {
@@ -41,26 +42,37 @@ class EmployerLogin extends React.Component {
     const {
       email, password, company, signUpView,
     } = this.state;
-    const { handleUserChange } = this.props;
 
     if (signUpView) {
       this.handleSignUp(email, password, company);
     } else {
-      handleUserChange(email, 1);
-      this.setState({ redirectToReferrer: true });
+      this.handleLogin(email, password);
     }
   }
 
   handleLogin(email, password) {
-    const { handleUserChange } = this.props;
+    const { handleUserChange, handleRedirect } = this.props;
 
-    axios.post;
+    axios.post('/employer/login', { email, password })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data);
+          handleUserChange(response.data.email, response.data.employer_id);
+          handleRedirect();
+        } else {
+          console.log('log in error');
+        }
+      })
+      .catch((error) => {
+        console.log('loginserver error: ');
+        console.log(error);
+      });
   }
 
   handleSignUp(email, password, company) {
     const { handleRedirect } = this.props;
 
-    axios.post('employer', {
+    axios.post('/employer/signup', {
       email,
       password,
       company,

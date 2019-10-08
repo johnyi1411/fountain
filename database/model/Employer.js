@@ -40,4 +40,4 @@ Employer.init({
   },
 });
 
-module.exports = { Employer };
+module.exports = Employer;

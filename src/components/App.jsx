@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import axios from 'axios';
 import {
   BrowserRouter as Router, Route, Link,
 } from 'react-router-dom';
@@ -16,6 +17,26 @@ class App extends React.Component {
       id: null,
     };
     this.handleUserChange = this.handleUserChange.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/user').then((response) => {
+      console.log('Get user response: ');
+      console.log(response.data);
+      if (response.data) {
+        console.log('Get User: There is a user saved in the server session: ');
+        this.setState({
+          user: response.data.user.email,
+          id: response.data.user.employer_id || response.data.user.applicant_id,
+        });
+      } else {
+        console.log('Get user: no user');
+        this.setState({
+          user: null,
+          id: null,
+        });
+      }
+    });
   }
 
   handleUserChange(user, id) {
