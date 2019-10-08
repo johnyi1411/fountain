@@ -6,6 +6,7 @@ const strategy = new LocalStrategy(
     usernameField: 'email',
   },
   ((email, password, done) => {
+    console.log('LocalStrategy callback');
     Employer.findOne({ where: { email } })
       .then((employer) => {
         if (!employer) {

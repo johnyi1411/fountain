@@ -51,14 +51,13 @@ class EmployerLogin extends React.Component {
   }
 
   handleLogin(email, password) {
-    const { handleUserChange, handleRedirect } = this.props;
+    const { handleUserChange } = this.props;
 
     axios.post('/employer/login', { email, password })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);
-          handleUserChange(response.data.email, response.data.employer_id);
-          handleRedirect();
+          handleUserChange(response.data.email, response.data.employer_id, true);
         } else {
           console.log('log in error');
         }

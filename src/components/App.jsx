@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  BrowserRouter as Router, Route, Link,
+  BrowserRouter as Router, Route, Link, Redirect,
 } from 'react-router-dom';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
@@ -15,6 +15,7 @@ class App extends React.Component {
     this.state = {
       user: null,
       id: null,
+      employer: false,
     };
     this.handleUserChange = this.handleUserChange.bind(this);
   }
@@ -27,6 +28,7 @@ class App extends React.Component {
         this.setState({
           user: response.data.user.email,
           id: response.data.user.employer_id || response.data.user.applicant_id,
+          employer: Boolean(response.data.user.employer_id),
         });
       } else {
         console.log('Get user: no user');
@@ -38,12 +40,12 @@ class App extends React.Component {
     });
   }
 
-  handleUserChange(user, id) {
-    this.setState({ user, id });
+  handleUserChange(user, id, employer) {
+    this.setState({ user, id, employer });
   }
 
   render() {
-    const { user, id } = this.state;
+    const { user, id, employer } = this.state;
 
     return (
       <Router>
@@ -62,6 +64,14 @@ class App extends React.Component {
               </ul>
             )}
           />
+          {user && (
+          <Redirect
+            to={{
+              pathname: employer ? '/employer' : '/applicant',
+              // state: { from: props.location },
+            }}
+          />
+          )}
           <Route path="/login" render={(props) => <Login {...props} handleUserChange={this.handleUserChange} />} />
           <PrivateRoute path="/employer" user={user} id={id} handleUserChange={this.handleUserChange} component={EmployerPage} />
           <PrivateRoute path="/applicant" user={user} id={id} handleUserChange={this.handleUserChange} component={ApplicantPage} />
