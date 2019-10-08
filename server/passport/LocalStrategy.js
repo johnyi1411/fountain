@@ -3,10 +3,9 @@ const Employer = require('../../database/model/Employer');
 
 const strategy = new LocalStrategy(
   {
-    usernameField: 'email', // not necessary, DEFAULT
+    usernameField: 'email',
   },
   ((email, password, done) => {
-    // const employer = Employer.build({ email, password });
     Employer.findOne({ where: { email } })
       .then((employer) => {
         if (!employer) {

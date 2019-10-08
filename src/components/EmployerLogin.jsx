@@ -64,8 +64,12 @@ class EmployerLogin extends React.Component {
         }
       })
       .catch((error) => {
-        console.log('loginserver error: ');
-        console.log(error);
+        if (error.response.status === 401) {
+          alert('wrong username or password');
+        } else {
+          console.log('loginserver error: ');
+          console.log(error);
+        }
       });
   }
 
