@@ -74,7 +74,7 @@ class EmployerPage extends React.Component {
                 <NewJobForm getEmployerJobs={this.getEmployerJobs} id={id} user={user} />
                 {jobs.map((job) => (
                   <div key={job.job_id} className="employer-jobs">
-                    <Link to={`/employer/${job.company}/job/${job.id}`}>{job.id}</Link>
+                    <Link to={`/employer/${job.company}/job/${job.job_id}`}>{job.job_id}</Link>
                     <p>{`employer: ${job.company}`}</p>
                     <p>{`title: ${job.title}`}</p>
                     <p>{`description: ${job.description}`}</p>
