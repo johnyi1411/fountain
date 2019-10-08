@@ -8,8 +8,6 @@ const strategy = new LocalStrategy(
     passReqToCallback: true,
   },
   ((req, email, password, done) => {
-    console.log('LocalStrategy callback');
-    console.log(req.body);
     if (req.body.userType === 'employer') {
       Employer.findOne({ where: { email } })
         .then((employer) => {
