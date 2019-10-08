@@ -117,7 +117,7 @@ passport.authenticate('local'),
 
 // -------- EMPLOYER JOBS -----------
 app.get('/employer/:id/job', (req, res) => {
-  JobController.getJobs(req.params.id, (error, results) => {
+  JobController.getEmployerJobs(req.params.id, (error, results) => {
     if (error) {
       console.log('error getting jobs', error);
       return;
@@ -132,6 +132,18 @@ app.post('/employer/:id/job', (req, res) => {
   JobController.postJob(title, description, id, (error, results) => {
     if (error) {
       console.log('error creating job', error);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
+});
+
+// -------- APPLICANT JOBS -----------
+app.get('/job', (req, res) => {
+  JobController.getAllJobs((error, results) => {
+    if (error) {
+      console.log('error getting jobs', error);
       return;
     }
     console.log(results);
