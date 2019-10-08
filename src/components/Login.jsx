@@ -80,8 +80,8 @@ class Login extends React.Component {
         if (response.data) {
           console.log('successful sign up');
           // send user back to employer or applicant page after sign up.
-          this.setState({ redirectToReferrer: true });
           handleUserChange(email, 1);
+          this.setState({ redirectToReferrer: true });
         } else {
           console.log('Sign up error');
         }

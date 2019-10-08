@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class EmployerLogin extends React.Component {
   constructor(props) {
@@ -50,10 +51,16 @@ class EmployerLogin extends React.Component {
     }
   }
 
-  handleSignUp(email, password, company) {
-    const { handleUserChange, handleRedirect } = this.props;
+  handleLogin(email, password) {
+    const { handleUserChange } = this.props;
 
-    axios.post('/employer', {
+    axios.post;
+  }
+
+  handleSignUp(email, password, company) {
+    const { handleRedirect } = this.props;
+
+    axios.post('employer', {
       email,
       password,
       company,
@@ -62,9 +69,8 @@ class EmployerLogin extends React.Component {
         console.log(response);
         if (response.data) {
           console.log('successful sign up');
-          // send user back to employer or applicant page after sign up.
+          // send user back to login page after sign up.
           handleRedirect();
-          handleUserChange(email, 1);
         } else {
           console.log('Sign up error');
         }
@@ -104,5 +110,10 @@ class EmployerLogin extends React.Component {
     );
   }
 }
+
+EmployerLogin.propTypes = {
+  handleUserChange: PropTypes.func.isRequired,
+  handleRedirect: PropTypes.func.isRequired,
+};
 
 export default EmployerLogin;

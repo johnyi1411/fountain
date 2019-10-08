@@ -13,4 +13,8 @@ module.exports = {
         callback(err);
       });
   },
+
+  // loginEmployer: (email, password, callback) => {
+  //   Employer.
+  // }
 };
