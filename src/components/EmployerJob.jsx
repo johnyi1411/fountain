@@ -9,12 +9,12 @@ class EmployerJob extends React.Component {
     this.state = {
       applicants: [
         {
-          id: 1,
-          name: 'eileen',
+          applicant_id: 1,
+          first_name: 'eileen',
         },
         {
-          id: 2,
-          name: 'justin',
+          applicant_id: 2,
+          first_name: 'justin',
         },
       ],
     };
@@ -45,7 +45,7 @@ class EmployerJob extends React.Component {
           <p>{`Job ID: ${id}`}</p>
           <p>{`Employer: ${employer}`}</p>
           <h1>Applicants</h1>
-          {applicants.map((applicant) => <p key={applicant.id}>{applicant.name}</p>)}
+          {applicants.map((applicant, i) => <p key={applicant.applicant_id}>{`${i + 1}. ${applicant.first_name} ${applicant.last_name}`}</p>)}
         </div>
         <button type="button" onClick={this.goBack}>Go Back</button>
       </div>

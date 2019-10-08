@@ -1,9 +1,10 @@
+/* eslint-disable camelcase */
 const Applicant = require('../model/Applicant');
 
 module.exports = {
-  createApplicant: (email, password, firstName, lastName, callback) => {
+  createApplicant: (email, password, first_name, last_name, callback) => {
     Applicant.create({
-      email, password, firstName, lastName,
+      email, password, first_name, last_name,
     })
       .then((applicant) => {
         callback(null, applicant);
