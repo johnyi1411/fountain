@@ -26,12 +26,25 @@ class ApplicantPage extends React.Component {
 
     this.goBack = this.goBack.bind(this);
     this.handleApply = this.handleApply.bind(this);
+    this.getApplicantApplications = this.getApplicantApplications.bind(this);
   }
 
   componentDidMount() {
+    const { id } = this.props;
     axios.get('/job')
       .then((results) => this.setState({ jobs: results.data }))
+      .then(() => this.getApplicantApplications(id))
       .catch((error) => console.log('error getting jobs', error));
+  }
+
+  getApplicantApplications(applicantId) {
+    axios.get(`/applicant/${applicantId}/application`)
+      .then((results) => {
+        const applications = {};
+        results.data.forEach((application) => applications[application.job_id] = true);
+        this.setState({ applications });
+      })
+      .catch((error) => console.log('error getting applications', error));
   }
 
   goBack() {
@@ -49,13 +62,20 @@ class ApplicantPage extends React.Component {
       });
   }
 
-  handleApply(id) {
-    const { applications } = this.state;
-    this.setState({ applications: { ...applications, [id]: true } });
+  handleApply(applicantId, jobId) {
+    axios.post('/application', {
+      applicantId,
+      jobId,
+    })
+      .then(() => {
+        this.getApplicantApplications(applicantId);
+      })
+      .catch((error) => console.log('error applying', error));
   }
 
   render() {
     const { jobs, applications } = this.state;
+    const { id } = this.props;
 
     return (
       <div>
@@ -66,7 +86,7 @@ class ApplicantPage extends React.Component {
             <p>{`Employer: ${job.company}`}</p>
             <p>{`Title: ${job.title}`}</p>
             <p>{`Description: ${job.description}`}</p>
-            {applications[job.job_id] ? <p>Applied</p> : <button className="apply-button" type="button" onClick={() => this.handleApply(job.job_id)}>Apply</button>}
+            {applications[job.job_id] ? <p>Applied</p> : <button className="apply-button" type="button" onClick={() => this.handleApply(id, job.job_id)}>Apply</button>}
           </div>
         ))}
         <button id="logout-button" type="button" onClick={this.goBack}>Logout</button>
@@ -77,6 +97,11 @@ class ApplicantPage extends React.Component {
 
 ApplicantPage.propTypes = {
   handleUserChange: PropTypes.func.isRequired,
+  id: PropTypes.number,
+};
+
+ApplicantPage.defaultProps = {
+  id: null,
 };
 
 export default ApplicantPage;

@@ -8,6 +8,7 @@ const passport = require('./passport/index');
 const EmployerController = require('../database/controller/Employer');
 const ApplicantController = require('../database/controller/Applicant');
 const JobController = require('../database/controller/Job');
+const ApplicationController = require('../database/controller/Application');
 
 const port = 3000;
 
@@ -144,6 +145,29 @@ app.get('/job', (req, res) => {
   JobController.getAllJobs((error, results) => {
     if (error) {
       console.log('error getting jobs', error);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.post('/application', (req, res) => {
+  const { applicantId, jobId } = req.body;
+  ApplicationController.createApplication(applicantId, jobId, (error, results) => {
+    if (error) {
+      console.log('error creating application', error);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.get('/applicant/:id/application', (req, res) => {
+  ApplicationController.getApplicantApplications(req.params.id, (error, results) => {
+    if (error) {
+      console.log('error getting applicant applications', error);
       return;
     }
     console.log(results);
