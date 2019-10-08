@@ -59,7 +59,7 @@ class ApplicantLogin extends React.Component {
   handleLogin(email, password) {
     const { handleUserChange } = this.props;
 
-    axios.post('/applicant/login', { email, password })
+    axios.post('/applicant/login', { email, password, userType: 'applicant' })
       .then((response) => {
         if (response.status === 200) {
           console.log(response.data);

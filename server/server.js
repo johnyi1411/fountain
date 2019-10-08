@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('./passport/index');
 
 const EmployerController = require('../database/controller/Employer');
+const ApplicantController = require('../database/controller/Applicant');
 
 const port = 3000;
 
@@ -40,7 +41,8 @@ app.post('/employer/signup', (req, res) => {
     }
     console.log(result);
     console.log('user signup');
-    req.session.email = req.body.email;
+    // old sign up session
+    // req.session.email = req.body.email;
     res.send(result);
   });
 });
@@ -78,4 +80,40 @@ app.post('/logout', (req, res) => {
   } else {
     res.send({ msg: 'no user to log out' });
   }
+});
+
+
+// APPLICANT ROUTES
+
+app.post('/applicant/signup', (req, res) => {
+  const {
+    email, password, firstName, lastName,
+  } = req.body;
+  ApplicantController.createApplicant(email, password, firstName, lastName, (err, result) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(result);
+    console.log('user signup');
+    // old sign up session
+    // req.session.email = req.body.email;
+    res.send(result);
+  });
+});
+
+app.post('/applicant/login', (req, res, next) => {
+  console.log('/applicant, login, req.body: ');
+  console.log(req.body);
+  next();
+},
+passport.authenticate('local'),
+(req, res) => {
+  console.log('logged in', req.user);
+  const { applicant_id, email } = req.user.dataValues;
+  const userInfo = {
+    applicant_id,
+    email,
+  };
+  res.send(userInfo);
 });

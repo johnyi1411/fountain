@@ -3,32 +3,6 @@ const config = require('../config/pg.config');
 
 const sequelize = new Sequelize(config);
 
-
-const Applicant = sequelize.define('applicant', {
-  applicant_id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
-
 // const Job = sequelize.define('job', {
 //   job_id: {
 //     type: Sequelize.INTEGER,
@@ -81,5 +55,5 @@ const Applicant = sequelize.define('applicant', {
 // });
 
 module.exports = {
-  sequelize, Sequelize, Applicant,
+  sequelize, Sequelize,
 };
