@@ -34,7 +34,6 @@ class EmployerPage extends React.Component {
 
   componentDidMount() {
     const { id } = this.props;
-    console.log(id);
     this.getEmployerJobs(id);
   }
 

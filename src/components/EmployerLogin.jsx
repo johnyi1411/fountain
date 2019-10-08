@@ -56,7 +56,6 @@ class EmployerLogin extends React.Component {
     axios.post('/employer/login', { email, password, userType: 'employer' })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
           handleUserChange(response.data.email, response.data.employer_id, true);
         } else {
           console.log('log in error');
@@ -81,7 +80,6 @@ class EmployerLogin extends React.Component {
       company,
     })
       .then((response) => {
-        console.log(response);
         if (response.data) {
           console.log('successful sign up');
           // send user back to login page after sign up.

@@ -62,7 +62,6 @@ class ApplicantLogin extends React.Component {
     axios.post('/applicant/login', { email, password, userType: 'applicant' })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
           handleUserChange(response.data.email, response.data.applicant_id, false);
         } else {
           console.log('log in error');
@@ -88,7 +87,6 @@ class ApplicantLogin extends React.Component {
       lastName,
     })
       .then((response) => {
-        console.log(response);
         if (response.data) {
           console.log('successful sign up');
           // send user back to login page after sign up.

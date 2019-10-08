@@ -22,16 +22,13 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/user').then((response) => {
-      console.log('Get user response: ');
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ');
         this.setState({
           user: response.data.user.email,
           id: response.data.user.employer_id || response.data.user.applicant_id,
           employer: Boolean(response.data.user.employer_id),
         });
       } else {
-        console.log('Get user: no user');
         this.setState({
           user: null,
           id: null,

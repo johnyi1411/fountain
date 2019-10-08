@@ -23,11 +23,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-// log to view session
-app.use((req, res, next) => {
-  console.log('req.session', req.session);
-  return next();
-});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,31 +36,22 @@ app.post('/employer/signup', (req, res) => {
       console.log(err);
       return;
     }
-    console.log(result);
-    console.log('user signup');
     res.send(result);
   });
 });
 
-app.post('/employer/login', (req, res, next) => {
-  console.log('/employer, login, req.body: ');
-  console.log(req.body);
-  next();
-},
-passport.authenticate('local'),
-(req, res) => {
-  console.log('logged in', req.user);
-  const { employer_id, email } = req.user.dataValues;
-  const userInfo = {
-    employer_id,
-    email,
-  };
-  res.send(userInfo);
-});
+app.post('/employer/login',
+  passport.authenticate('local'),
+  (req, res) => {
+    const { employer_id, email } = req.user.dataValues;
+    const userInfo = {
+      employer_id,
+      email,
+    };
+    res.send(userInfo);
+  });
 
 app.get('/user', (req, res) => {
-  console.log('===== user!!======');
-  console.log(req.user);
   if (req.user) {
     res.json({ user: req.user });
   } else {
@@ -94,27 +80,20 @@ app.post('/applicant/signup', (req, res) => {
       console.log(err);
       return;
     }
-    console.log(result);
-    console.log('user signup');
     res.send(result);
   });
 });
 
-app.post('/applicant/login', (req, res, next) => {
-  console.log('/applicant, login, req.body: ');
-  console.log(req.body);
-  next();
-},
-passport.authenticate('local'),
-(req, res) => {
-  console.log('logged in', req.user);
-  const { applicant_id, email } = req.user.dataValues;
-  const userInfo = {
-    applicant_id,
-    email,
-  };
-  res.send(userInfo);
-});
+app.post('/applicant/login',
+  passport.authenticate('local'),
+  (req, res) => {
+    const { applicant_id, email } = req.user.dataValues;
+    const userInfo = {
+      applicant_id,
+      email,
+    };
+    res.send(userInfo);
+  });
 
 // -------- EMPLOYER JOBS -----------
 app.get('/employer/:id/job', (req, res) => {
@@ -123,7 +102,6 @@ app.get('/employer/:id/job', (req, res) => {
       console.log('error getting jobs', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
@@ -135,7 +113,6 @@ app.post('/employer/:id/job', (req, res) => {
       console.log('error creating job', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
@@ -146,7 +123,6 @@ app.get('/employer/:employer/job/:jobId/applicant', (req, res) => {
       console.log('error getting jobs', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
@@ -158,7 +134,6 @@ app.get('/job', (req, res) => {
       console.log('error getting jobs', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
@@ -170,7 +145,6 @@ app.post('/application', (req, res) => {
       console.log('error creating application', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
@@ -181,7 +155,6 @@ app.get('/applicant/:id/application', (req, res) => {
       console.log('error getting applicant applications', error);
       return;
     }
-    console.log(results);
     res.send(results);
   });
 });
