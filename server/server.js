@@ -3,7 +3,10 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const pg = require('pg');
 const passport = require('./passport/index');
+const pgSession = require('connect-pg-simple')(session);
+const config = require('../database/config/pg.config');
 
 const EmployerController = require('../database/controller/Employer');
 const ApplicantController = require('../database/controller/Applicant');
@@ -18,10 +21,16 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+const pgPool = new pg.Pool(config);
+
 app.use(session({
   secret: 'admiration-frequently',
   resave: false,
   saveUninitialized: false,
+  store: new pgSession({
+    pool: pgPool, // Connection pool
+  }),
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
 }));
 
 app.use(passport.initialize());
