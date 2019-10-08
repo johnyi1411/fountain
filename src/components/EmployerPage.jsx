@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import axios from 'axios';
 import {
   BrowserRouter as Router, Route, Link,
 } from 'react-router-dom';
@@ -32,9 +33,18 @@ class EmployerPage extends React.Component {
   }
 
   goBack() {
-    const { history, handleUserChange } = this.props;
-    handleUserChange(null, null);
-    history.goBack();
+    const { handleUserChange } = this.props;
+
+    axios.post('/logout')
+      .then((result) => {
+        if (result.data.msg === 'logging out') {
+          handleUserChange(null, null, false);
+        }
+      })
+      .catch((error) => {
+        console.log('error logging out');
+        console.log(error.response);
+      });
   }
 
   handleNewJob(title, description, id, employer) {

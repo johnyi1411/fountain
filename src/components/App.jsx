@@ -68,7 +68,6 @@ class App extends React.Component {
           <Redirect
             to={{
               pathname: employer ? '/employer' : '/applicant',
-              // state: { from: props.location },
             }}
           />
           )}

@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import EmployerLogin from './EmployerLogin';
+import ApplicantLogin from './ApplicantLogin';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,7 +29,20 @@ class Login extends React.Component {
 
     return (
       <div>
-        {from.pathname === '/employer' ? <EmployerLogin handleRedirect={this.handleRedirect} handleUserChange={handleUserChange} /> : <div>nothing</div>}
+        {from.pathname === '/employer'
+          ? (
+            <EmployerLogin
+              handleRedirect={this.handleRedirect}
+              handleUserChange={handleUserChange}
+            />
+          )
+          : (
+            <ApplicantLogin
+              handleRedirect={this.handleRedirect}
+              handleUserChange={handleUserChange}
+            />
+          )}
+        <Link to="/">Home</Link>
       </div>
     );
   }
