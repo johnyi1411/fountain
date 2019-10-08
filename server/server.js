@@ -28,17 +28,16 @@ app.listen(port);
 
 app.post('/employer', (req, res) => {
   const { email, password, company } = req.body;
-  // EmployerController.createEmployer(email, password, company, (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   }
-  //   console.log(result);
-  //   res.send(result);
-  // });
-  console.log('user signup');
-  req.session.email = req.body.email;
-  res.end();
+  EmployerController.createEmployer(email, password, company, (err, result) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(result);
+    console.log('user signup');
+    req.session.email = req.body.email;
+    res.send(result);
+  });
 });
 
 // app.post('/employer/login', (req, res) => {

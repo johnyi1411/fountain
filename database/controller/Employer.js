@@ -1,4 +1,4 @@
-const { Employer } = require('../model/Models');
+const { Employer } = require('../model/Employer');
 
 module.exports = {
   createEmployer: (email, password, company, callback) => {
