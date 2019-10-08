@@ -23,6 +23,10 @@ class NewJobForm extends React.Component {
   }
 
   handleNewJob(title, description, id) {
+    if (!title || !description) {
+      alert('title and description is required');
+      return;
+    }
     const { getEmployerJobs } = this.props;
     axios.post(`/employer/${id}/job`, {
       title,

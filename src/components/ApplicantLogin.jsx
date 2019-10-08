@@ -57,6 +57,10 @@ class ApplicantLogin extends React.Component {
   }
 
   handleLogin(email, password) {
+    if (!email || !password) {
+      alert('email and password required');
+      return;
+    }
     const { handleUserChange } = this.props;
 
     axios.post('/applicant/login', { email, password, userType: 'applicant' })
@@ -78,6 +82,10 @@ class ApplicantLogin extends React.Component {
   }
 
   handleSignUp(email, password, firstName, lastName) {
+    if (!email || !password || !firstName || !lastName) {
+      alert('email and password required');
+      return;
+    }
     const { handleRedirect } = this.props;
 
     axios.post('/applicant/signup', {
@@ -111,7 +119,7 @@ class ApplicantLogin extends React.Component {
         <form onSubmit={this.handleLoginFormSubmit}>
           <label htmlFor="email">
             Email:
-            <input type="text" onChange={this.handleEmailChange} />
+            <input type="email" onChange={this.handleEmailChange} />
           </label>
           <label htmlFor="password">
             Password:

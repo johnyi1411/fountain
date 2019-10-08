@@ -51,6 +51,10 @@ class EmployerLogin extends React.Component {
   }
 
   handleLogin(email, password) {
+    if (!email || !password) {
+      alert('email and password required');
+      return;
+    }
     const { handleUserChange } = this.props;
 
     axios.post('/employer/login', { email, password, userType: 'employer' })
@@ -104,7 +108,7 @@ class EmployerLogin extends React.Component {
         <form onSubmit={this.handleLoginFormSubmit}>
           <label htmlFor="email">
             Email:
-            <input type="text" onChange={this.handleEmailChange} />
+            <input type="email" onChange={this.handleEmailChange} />
           </label>
           <label htmlFor="password">
             Password:
