@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class EmployerJob extends React.Component {
   constructor(props) {
@@ -19,6 +20,14 @@ class EmployerJob extends React.Component {
     };
 
     this.goBack = this.goBack.bind(this);
+  }
+
+  componentDidMount() {
+    const { match } = this.props;
+    const { id, employer } = match.params;
+    axios.get(`/employer/${employer}/job/${id}/applicant`)
+      .then((results) => this.setState({ applicants: results.data }))
+      .catch((error) => console.log('error getting applicants', error));
   }
 
   goBack() {
