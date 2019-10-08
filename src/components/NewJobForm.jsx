@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class NewJobForm extends React.Component {
   constructor(props) {
@@ -21,8 +22,19 @@ class NewJobForm extends React.Component {
     this.setState({ description: e.target.value });
   }
 
+  handleNewJob(title, description, id) {
+    const { getEmployerJobs } = this.props;
+    axios.post(`/employer/${id}/job`, {
+      title,
+      description,
+      id,
+    })
+      .then(() => getEmployerJobs(id))
+      .catch((error) => console.log('error posting job', error));
+  }
+
   render() {
-    const { handleNewJob, id, user } = this.props;
+    const { id, user } = this.props;
     const { title, description } = this.state;
 
     return (
@@ -30,7 +42,8 @@ class NewJobForm extends React.Component {
         <h1>Create New Job</h1>
         <form onSubmit={(e) => {
           e.preventDefault();
-          handleNewJob(title, description, id, user);
+          e.target.reset();
+          this.handleNewJob(title, description, id, user);
         }}
         >
           <label htmlFor="title">
@@ -49,9 +62,9 @@ class NewJobForm extends React.Component {
 }
 
 NewJobForm.propTypes = {
-  handleNewJob: PropTypes.func.isRequired,
   id: PropTypes.number,
   user: PropTypes.string,
+  getEmployerJobs: PropTypes.func.isRequired,
 };
 
 NewJobForm.defaultProps = {

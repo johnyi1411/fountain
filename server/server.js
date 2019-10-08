@@ -7,6 +7,7 @@ const passport = require('./passport/index');
 
 const EmployerController = require('../database/controller/Employer');
 const ApplicantController = require('../database/controller/Applicant');
+const JobController = require('../database/controller/Job');
 
 const port = 3000;
 
@@ -41,8 +42,6 @@ app.post('/employer/signup', (req, res) => {
     }
     console.log(result);
     console.log('user signup');
-    // old sign up session
-    // req.session.email = req.body.email;
     res.send(result);
   });
 });
@@ -83,7 +82,7 @@ app.post('/logout', (req, res) => {
 });
 
 
-// APPLICANT ROUTES
+// -----------APPLICANT ROUTES--------------
 
 app.post('/applicant/signup', (req, res) => {
   const {
@@ -96,8 +95,6 @@ app.post('/applicant/signup', (req, res) => {
     }
     console.log(result);
     console.log('user signup');
-    // old sign up session
-    // req.session.email = req.body.email;
     res.send(result);
   });
 });
@@ -116,4 +113,28 @@ passport.authenticate('local'),
     email,
   };
   res.send(userInfo);
+});
+
+// -------- EMPLOYER JOBS -----------
+app.get('/employer/:id/job', (req, res) => {
+  JobController.getJobs(req.params.id, (error, results) => {
+    if (error) {
+      console.log('error getting jobs', error);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
+});
+
+app.post('/employer/:id/job', (req, res) => {
+  const { title, description, id } = req.body;
+  JobController.postJob(title, description, id, (error, results) => {
+    if (error) {
+      console.log('error creating job', error);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
 });

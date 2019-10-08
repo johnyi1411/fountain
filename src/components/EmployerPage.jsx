@@ -14,13 +14,13 @@ class EmployerPage extends React.Component {
     this.state = {
       jobs: [
         {
-          id: 1,
+          job_id: 1,
           employer: 'brian',
           title: 'software engineer',
           description: 'with react',
         },
         {
-          id: 2,
+          job_id: 2,
           employer: 'brian',
           title: 'software engineering intern experience',
           description: 'with 6 years',
@@ -29,7 +29,19 @@ class EmployerPage extends React.Component {
     };
 
     this.goBack = this.goBack.bind(this);
-    this.handleNewJob = this.handleNewJob.bind(this);
+    this.getEmployerJobs = this.getEmployerJobs.bind(this);
+  }
+
+  componentDidMount() {
+    const { id } = this.props;
+    console.log(id);
+    this.getEmployerJobs(id);
+  }
+
+  getEmployerJobs(id) {
+    axios.get(`/employer/${id}/job`)
+      .then(({ data }) => this.setState({ jobs: data }))
+      .catch((error) => console.log('error getting jobs', error));
   }
 
   goBack() {
@@ -47,14 +59,6 @@ class EmployerPage extends React.Component {
       });
   }
 
-  handleNewJob(title, description, id, employer) {
-    const { jobs } = this.state;
-    jobs.push({
-      title, id: 3, description, employer,
-    });
-    this.setState({ jobs });
-  }
-
   render() {
     const { jobs } = this.state;
     const { user, id } = this.props;
@@ -67,11 +71,11 @@ class EmployerPage extends React.Component {
             path="/employer"
             render={() => (
               <div>
-                <NewJobForm handleNewJob={this.handleNewJob} id={id} user={user} />
+                <NewJobForm getEmployerJobs={this.getEmployerJobs} id={id} user={user} />
                 {jobs.map((job) => (
-                  <div key={job.id} className="employer-jobs">
-                    <Link to={`/employer/${job.employer}/job/${job.id}`}>{job.id}</Link>
-                    <p>{`employer: ${job.employer}`}</p>
+                  <div key={job.job_id} className="employer-jobs">
+                    <Link to={`/employer/${job.company}/job/${job.id}`}>{job.id}</Link>
+                    <p>{`employer: ${job.company}`}</p>
                     <p>{`title: ${job.title}`}</p>
                     <p>{`description: ${job.description}`}</p>
                   </div>

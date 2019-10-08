@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const bcrypt = require('bcryptjs');
-const { sequelize, Sequelize } = require('./Models');
+const { sequelize, Sequelize } = require('./index');
 const { hashPassword } = require('./lib/bcrypt');
 
 const { Model } = Sequelize;
