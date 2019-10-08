@@ -68,7 +68,6 @@ class ApplicantPage extends React.Component {
 }
 
 ApplicantPage.propTypes = {
-  history: PropTypes.object.isRequired,
   handleUserChange: PropTypes.func.isRequired,
 };
 
