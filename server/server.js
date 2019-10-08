@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const pg = require('pg');
-const passport = require('./passport/index');
 const pgSession = require('connect-pg-simple')(session);
+const passport = require('./passport/index');
 const config = require('../database/config/pg.config');
 
 const EmployerController = require('../database/controller/Employer');
@@ -78,7 +78,7 @@ app.post('/logout', (req, res) => {
 });
 
 
-// -----------APPLICANT ROUTES--------------
+// -----------APPLICANT SIGN UP/LOGIN ROUTES--------------
 
 app.post('/applicant/signup', (req, res) => {
   const {

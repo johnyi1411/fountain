@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-const {
-  Employer, Applicant, Job, Application,
-} = require('./model/Models');
+const Employer = require('./model/Employer');
+const Applicant = require('./model/Applicant');
+const Job = require('./model/Job');
+const Application = require('./model/Application');
 
 Employer.sync()
   .then(() => {
