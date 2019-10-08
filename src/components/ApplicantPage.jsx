@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class ApplicantPage extends React.Component {
   constructor(props) {
@@ -28,9 +29,18 @@ class ApplicantPage extends React.Component {
   }
 
   goBack() {
-    const { history, handleUserChange } = this.props;
-    handleUserChange(null, null);
-    history.goBack();
+    const { handleUserChange } = this.props;
+
+    axios.post('/logout')
+      .then((result) => {
+        if (result.data.msg === 'logging out') {
+          handleUserChange(null, null, false);
+        }
+      })
+      .catch((error) => {
+        console.log('error logging out');
+        console.log(error.response);
+      });
   }
 
   handleApply(id) {
