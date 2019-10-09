@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
-const config = require('../config/pg.config');
+const {
+  user, host, database, password, port, dialect,
+} = require('../config/pg.config');
 
-const sequelize = new Sequelize(config);
+const sequelize = new Sequelize(`${dialect}://${user}:${password}@${host}:${port}/${database}`);
 
 module.exports = {
   sequelize, Sequelize,

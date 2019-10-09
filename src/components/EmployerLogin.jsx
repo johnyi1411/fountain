@@ -85,7 +85,6 @@ class EmployerLogin extends React.Component {
     })
       .then((response) => {
         if (response.data) {
-          console.log('successful sign up');
           // send user back to login page after sign up.
           handleRedirect();
         } else {
