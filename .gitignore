@@ -1,3 +1,4 @@
 /node_modules
 /public/bundle.js
 /database/config/pg.config.js
+codingChallenge.pem
