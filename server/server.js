@@ -19,7 +19,7 @@ const app = express();
 const pgPool = new pg.Pool(config);
 
 // Port
-const port = 3000;
+const port = 80;
 
 // Middleware
 app.use(morgan('tiny'));
