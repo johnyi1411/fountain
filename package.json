@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start-dev": "nodemon ./server/server.js",
-    "build": "npx webpack --watch",
+    "build-dev": "npx webpack --watch",
+    "build": "npx webpack --mode=production",
     "start": "node ./server/server.js"
   },
   "author": "",
