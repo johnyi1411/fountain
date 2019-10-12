@@ -7,16 +7,7 @@ class EmployerJob extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      applicants: [
-        {
-          applicant_id: 1,
-          first_name: 'eileen',
-        },
-        {
-          applicant_id: 2,
-          first_name: 'justin',
-        },
-      ],
+      applicants: [],
     };
 
     this.goBack = this.goBack.bind(this);

@@ -12,20 +12,7 @@ class EmployerPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobs: [
-        {
-          job_id: 1,
-          employer: 'brian',
-          title: 'software engineer',
-          description: 'with react',
-        },
-        {
-          job_id: 2,
-          employer: 'brian',
-          title: 'software engineering intern experience',
-          description: 'with 6 years',
-        },
-      ],
+      jobs: [],
     };
 
     this.goBack = this.goBack.bind(this);
